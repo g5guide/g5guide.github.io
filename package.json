@@ -1,0 +1,28 @@
+{
+  "private": "true",
+  "name": "g5guide",
+  "license": "CC-BY-SA-4.0",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@giscus/vue": "^2.3.0",
+    "deepmerge": "^4.3.1",
+    "sitemap": "^7.1.1",
+    "vitepress": "^1.0.0-beta.5",
+    "vitepress-plugin-google-analytics": "^1.0.2",
+    "vitepress-plugin-tabs": "^0.3.0",
+    "vue": "^3.2.45"
+  },
+  "author": {
+    "name": "kkigomi",
+    "email": "kkigomi@duck.com",
+    "url": "https://github.com/kkigomi"
+  },
+  "dependencies": {
+    "vitepress-markdown-timeline": "^1.2.1"
+  }
+}
