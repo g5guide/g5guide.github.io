@@ -6,6 +6,7 @@ import googleAnalytics from 'vitepress-plugin-google-analytics'
 
 import { useData, useRoute, useRouter } from 'vitepress';
 
+import './style.css'
 import "vitepress-markdown-timeline/dist/theme/index.css";
 
 
@@ -51,3 +52,5 @@ export default {
         });
     }
 }
+
+
