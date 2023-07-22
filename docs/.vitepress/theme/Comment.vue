@@ -11,7 +11,7 @@
         <div style="margin-top: 3rem;">
             <Giscus
                 id="comments"
-                repo="g5guide/g5guide.githu.io"
+                repo="g5guide/g5guide.github.io"
                 repoId="R_kgDOJ55vGA"
                 category="Comments"
                 categoryId="DIC_kwDOJ55vGM4CX0n5"
