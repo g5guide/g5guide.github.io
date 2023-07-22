@@ -11,9 +11,9 @@
         <div style="margin-top: 3rem;">
             <Giscus
                 id="comments"
-                repo="g5guide/guide"
+                repo="g5guide/g5guide.githu.io"
                 repoId="R_kgDOJ55vGA"
-                category="문서 댓글"
+                category="Comments"
                 categoryId="DIC_kwDOJ55vGM4CX0n5"
                 mapping="pathname"
                 term=""

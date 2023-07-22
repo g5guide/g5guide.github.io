@@ -21,7 +21,7 @@ features:
   - icon: 💻
     title: 개발자 가이드
     details: (작성 중) 개발자 가이드
-    link: /developers/index
+    link: /developers/lifecycle
   - icon: 🎁
     title: 테마 만들기
     details: (작성 중) 테마 제작 가이드

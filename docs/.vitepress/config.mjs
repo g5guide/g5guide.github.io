@@ -172,7 +172,7 @@ export default defineConfig(deepmerge(mergeConfig, {
                         { text: '테마 설정', link: '/make/theme/config' },
                         { text: '레이아웃', link: '/make/theme/layout' },
                         { text: '경로 및 URL', link: '/make/theme/path_and_url' },
-                        { text: '메뉴 및 위젯', link: '/make/theme/components' },
+                        { text: '메뉴 및 위젯', link: '/make/theme/widget' },
                     ],
                 },
                 {
@@ -262,7 +262,7 @@ export default defineConfig(deepmerge(mergeConfig, {
                 items: [
                     { text: '테마', link: '/make/theme/about' },
                     { text: '스킨', link: '/make/skin' },
-                    { text: '개발자 가이드', link: '/developers/index' },
+                    { text: '개발자 가이드', link: '/developers/lifecycle' },
                 ]
             },
         ],
