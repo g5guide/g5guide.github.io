@@ -66,7 +66,9 @@ function exists($type, $key, $group = 'default');
 
 ### delete()
 
-현재 버그<sup>[#255](https://github.com/gnuboard/gnuboard5/issues/225)</sup>로 인해 동작하지 않는다.
+```php
+function delete($type, $key, $group = 'default');
+```
 
 ## 파일 캐시
 

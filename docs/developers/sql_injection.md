@@ -17,3 +17,5 @@ $memberId = 'admin';
 
 mysqli_stmt_execute($stmt);
 ```
+
+## PDO 사용하기

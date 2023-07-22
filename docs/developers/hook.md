@@ -107,7 +107,7 @@ class MyHookListenerClass
 ```
 
 ::: info
-클로저는 리스너로 등록할 수 없다.
+그누보드 5.5.8.3.2 버전<sup>2023.07.17 배포</sup>부터는 Closure 및 `ClassName::staticMethod` 형태의 문자열을 사용할 수 있다.
 :::
 
 ::: warning
