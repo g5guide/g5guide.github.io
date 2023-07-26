@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/developers/database.html
+---
 # Database
 
 DB 질의를 위한 몇 가지 헬퍼 함수로 MySQL/MySQLi API를 사용하여 MySQL 및 MariaDB를 지원한다.

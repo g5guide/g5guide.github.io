@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/gnuboard/install.html
+---
 # 설치하기
 
 TBD

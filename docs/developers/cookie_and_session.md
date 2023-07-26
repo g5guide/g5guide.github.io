@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/developers/cookie_and_session.html
+---
 # 쿠키 및 세션
 
 TBD

@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/make/theme/path_and_url.html
+---
 # 테마 경로 및 URL
 
 `G5_BBS_URL`처럼 테마 경로를 기반으로 서버 내 경로 및 URL을 담은 상수를 사용할 수 있다.

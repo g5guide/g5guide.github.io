@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/make/theme/config.html
+---
 # 테마 설정
 
 `theme.config.php` 파일에 테마의 기본 설정 정보를 담고 있다. 테마가 적용되면 이 파일은 우선 include하여 그누보드의 레이아웃, 스킨 등의 적용과 일부 동작을 처리하는데 사용된다.

@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/developers/sql_injection.html
+---
 # SQL Injection
 
 그누보드는 PHP의 MySQL/MySQLi API를 사용하고 있으며, Prepared Statement를 사용하지 않는다. [오염된 전역변수](/developers/polluted_variables) 문제가 더해져 사용자 입력 변수와 전역변수의 데이터에 모두 위험성이 존재하며, SQL 질의문을 문자열에 변수를 직접 조합하므로 SQL 인젝션 공격에 취약하다.

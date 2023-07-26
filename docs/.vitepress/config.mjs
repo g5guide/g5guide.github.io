@@ -64,105 +64,23 @@ export default defineConfig(deepmerge(mergeConfig, {
                         { text: '회원' },
                         { text: '포인트' },
                         { text: '짧은 주소' },
-                        { text: '' },
-                        { text: '' },
-                        { text: '' },
                     ]
                 },
                 {
                     text: '환경 설정',
-                    collapsible: true,
-                    // collapsed: true,
                     items: [
                         { text: '기본 환경' },
                         { text: '관리 권한' },
                         { text: '테마' },
                         { text: '메뉴' },
-                        { text: '메일 테스트' },
-                        { text: '팝업 레이어 관리' },
-                    ]
-                },
-                {
-                    text: '회원',
-                    collapsible: true,
-                    // collapsed: true,
-                    items: [
-                        { text: '회원 관리' },
-                        { text: '회원메일발송' },
-                        { text: '접속자 집계' },
-                        { text: '접속자 검색' },
-                        { text: '접속자 로그 삭제' },
-                        { text: '포인트 관리' },
-                        { text: '투표 관리' },
-                    ]
-                },
-                {
-                    text: '게시판',
-                    collapsible: true,
-                    // collapsed: true,
-                    items: [
-                        { text: '게시판 관리' },
-                        { text: '게시판 그룹' },
-                        { text: '인기검색어관리' },
-                        { text: '인기검색어순위' },
-                        { text: '1:1문의설정' },
-                        { text: '내용관리' },
-                        { text: 'FAQ 관리' },
-                        { text: '글, 댓글 현황' },
                     ]
                 },
                 {
                     text: '운영 & 관리',
-                    collapsible: true,
-                    // collapsed: true,
                     items: [
-                        { text: 'phpinfo()' },
-                        { text: '(통합1)세션파일 일괄삭제' },
-                        { text: '(통합1)캐시파일 일괄삭제' },
-                        { text: '(통합1)캡챠파일 일괄삭제' },
-                        { text: '(통합1)썸네일파일 일괄삭제' },
-                        { text: '(통합1)Browscap 업데이트' },
-                        { text: '(통합1)접속로그 변환' },
-                        { text: '(통합2)DB 업그레이드' },
-                        { text: '(통합2)업데이트' },
+                        { text: '업데이트' },
                     ]
                 },
-            ],
-            '/youngcart': [
-                {
-                    text: '쇼핑몰 관리',
-                    items: [
-                        { text: '쇼핑몰현황' },
-                        { text: '쇼핑몰설정' },
-                        { text: '주문내역' },
-                        { text: '개인결제관리' },
-                        { text: '분류관리' },
-                        { text: '상품관리' },
-                        { text: '상품문의' },
-                        { text: '사용후기' },
-                        { text: '상품재고관리' },
-                        { text: '상품유형관리' },
-                        { text: '상품옵션재고관리' },
-                        { text: '쿠폰관리' },
-                        { text: '쿠폰존관리' },
-                        { text: '추가배송비관리' },
-                        { text: '미완료주문' },
-                    ]
-                },
-                {
-                    text: '쇼핑몰현황/기타',
-                    items: [
-                        { text: '매출현황' },
-                        { text: '상품판매순위' },
-                        { text: '주문내역출력' },
-                        { text: '재입고SMS알림' },
-                        { text: '이벤트관리' },
-                        { text: '이벤트일괄처리' },
-                        { text: '배너관리' },
-                        { text: '보관함현황' },
-                        { text: '가격비교사이트' },
-                    ],
-                }
             ],
             '/make/': [
                 {
@@ -255,16 +173,10 @@ export default defineConfig(deepmerge(mergeConfig, {
             ]
         },
         nav: [
-            { text: '그누보드', link: '/gnuboard/index' },
-            { text: '영카트', link: '/youngcart/index' },
-            {
-                text: '만들기',
-                items: [
-                    { text: '테마', link: '/make/theme/about' },
-                    { text: '스킨', link: '/make/skin' },
-                    { text: '개발자 가이드', link: '/developers/lifecycle' },
-                ]
-            },
+            { text: '그누보드', link: '/gnuboard/install' },
+            { text: '테마', link: '/make/theme/about' },
+            { text: '스킨', link: '/make/skin' },
+            { text: '개발자 가이드', link: '/developers/lifecycle' },
         ],
         socialLinks: [
             { icon: 'github', link: 'https://github.com/g5guide/g5guide.github.io' },

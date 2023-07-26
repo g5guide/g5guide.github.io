@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/developers/path_and_url.html
+---
 # 경로 및 URL Rewrite
 
 파일을 include 하거나 스킨의 경로 지정, JS/CSS 파일을 로드하는 등 서버 내 경로나 URL을 사용할 때 미리 만들어진 상수나 헬퍼 함수를 활용할 수 있다.

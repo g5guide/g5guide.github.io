@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/developers/debug.html
+---
 # 디버깅
 
 그누보드에는 실행된 SQL 질의문 목록과 실행된 [Hook](./hook) 목록을 볼 수 있는 간단한 기능이 내장되어있다. 최고관리자로 지정된 계정으로 로그인 했을 떄만 동작하므로 관리자 접속 세션의 상태만 확인할 수 있다.

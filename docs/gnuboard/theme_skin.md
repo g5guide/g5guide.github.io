@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/gnuboard/theme_skin.html
+---
 # 테마 & 스킨
 
 TBD

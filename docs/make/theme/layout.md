@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/make/theme/layout.html
+---
 # 레이아웃
 
 레이아웃은 테마의 필수 요소이며 테마는 레이아웃을 위한 기능이다. 레이아웃은 스마트폰 등 소형 디스플레이 가진 기기를 위한 모바일 전용과 그 외의 공용 레이아웃으로 나눠 볼 수 있으며, 모바일 레이아웃은 필수 요소가 아니다.

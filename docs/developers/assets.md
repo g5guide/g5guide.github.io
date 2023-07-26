@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/developers/assets.html
+---
 # JS & CSS (Assets)
 
 JS, CSS 파일(코드)을 HTML Head에 추가하기 위해 사용한다. 파일의 경로만 사용하지 않고 `<link>` 또는 `<script>` HTML 태그를 포함하여 추가할 수 있으므로 Assets 파일 뿐 아니라 임의의 코드를 추가할 수 있다.

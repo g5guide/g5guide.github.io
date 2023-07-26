@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/make/skin/outlogin.html
+---
 # 아웃로그인 스킨
 
 아웃로그인 스킨은 로그인 상태에 따라 파일이 나뉘어있다.

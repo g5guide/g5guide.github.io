@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/developers/make_plugin.html
+---
 # 플러그인 (extend)
 
 `/extend` 폴더에 `*.php` 파일을 두면 자동으로 include 한다.

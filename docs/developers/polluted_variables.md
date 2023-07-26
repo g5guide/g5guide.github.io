@@ -1,4 +1,10 @@
-# 오염된 전역변수
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/developers/polluted_variables.html
+---
+# 그누보드가 오염시킨 전역변수
 
 그누보드는 `extract()` 함수로 `$_GET`, `$_POST`, `$_SERVER` 슈퍼 글로벌 변수의 모든 항목을 개별 전역변수로 모두 풀어놓는다.
 

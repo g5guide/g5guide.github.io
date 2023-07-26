@@ -1,9 +1,10 @@
 ---
-title: GNUBOARD 5
+title: 그누보드5 가이드
+description: 개발사가 안 만들어서 사용자가 직접 만드는 그누보드 안내서
 layout: home
 hero:
   name: GNUBOARD 5 Guide
-  text: 사용자/개발자 가이드
+  text: 그누보드5 가이드
   tagline: 개발사가 안 만들어서 사용자가 직접 만드는 그누보드 안내서
   # actions:
   #   - theme: brand
@@ -11,13 +12,9 @@ hero:
   #     link: https://github.com/g5-docs/docs/discussions/1
 features:
   - icon: 😀
-    title: 그누보드 사용 가이드
+    title: 그누보드
     details: (작성 중) 그누보드 일반 사용 가이드
     link: /gnuboard/index
-  - icon: 🛍️
-    title: 영카트 사용 가이드
-    details: (작성 중) 영카트 일반 사용 가이드
-    link: /youngcart/index
   - icon: 💻
     title: 개발자 가이드
     details: (작성 중) 개발자 가이드

@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/developers/hook.html
+---
 # Hook
 
 그누보드5는 기능 확장 방법으로 Hook을 지원한다.

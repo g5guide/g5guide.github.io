@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/developers/admin_menu.html
+---
 # 관리자 메뉴 추가
 
 관리페이지에 메뉴를 추가하려면 다소 복잡한 과정을 거쳐야 한다.

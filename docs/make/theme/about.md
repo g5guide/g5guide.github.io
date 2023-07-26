@@ -1,8 +1,10 @@
-# 테마 개요
-
-[[toc]]
-
 ---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/make/theme/about.html
+---
+# 테마 개요
 
 그누보드 테마는 사이트의 레이아웃을 꾸미는데 사용된다. 게시판 스킨, 최신글 위젯 스킨 등을 포함시킬 수 있어서 사이트 레이아웃과 어울리는 스킨을 함께 배포하기에 적합하다.
 

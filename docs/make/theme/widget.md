@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/make/theme/widget.html
+---
 # 메뉴 및 위젯
 
 ## 메뉴

@@ -1,3 +1,9 @@
+---
+head:
+  - - link
+    - name: canonical
+      content: https://g5guide.github.io/developers/file_security.html
+---
 # 파일 접근 제한
 
 그누보드의 모든 파일이 웹에서 접근이 가능한 상태로 설치하여 사용된다.
