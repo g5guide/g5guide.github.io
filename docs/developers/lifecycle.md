@@ -3,7 +3,9 @@ head:
   - - link
     - name: canonical
       content: https://g5guide.github.io/developers/lifecycle.html
+description: 그누보드는 통일된 Request 처리를 지원하지 않으며 분산된 Endpoint를 사용한다. 요청에 따라 각자의 요청을 처리하고 대부분은 HTML로 응답한다. 대부분의 요청에 같은 초기화 로직이 실행되고 기능 확장을 위한 파일을 로드하므로 대부분의 요청에서 기능 확장을 적용할 수 있다.
 ---
+
 # 라이프 사이클
 
 그누보드는 통일된 Request 처리를 지원하지 않으며 분산된 Endpoint를 사용한다. 요청에 따라 각자의 요청을 처리하고 대부분은 HTML로 응답한다.
@@ -11,7 +13,7 @@ head:
 대부분의 요청에 같은 초기화 로직이 실행되고 기능 확장을 위한 파일을 로드하므로 대부분의 요청에서 기능 확장을 적용할 수 있다.
 
 ::: info
-HEAD, OPTIONS 등 HTTP Method에 따라 응답을 다르게 반환하지 않으며, `Accept` 헤더를 인식하여 처리하지 않는다.
+`HEAD`, `OPTIONS` 등 HTTP Method에 따라 응답을 다르게 반환하지 않으며, `Accept` 헤더를 인식하여 처리하지 않는다.
 :::
 
 ## 요청
@@ -23,7 +25,7 @@ HEAD, OPTIONS 등 HTTP Method에 따라 응답을 다르게 반환하지 않으�
 
 웹서버의 [URL Rewrite](/developers/path_and_url)를 사용할 수 있지만 Router는 지원하지 않고 각각의 파일로 보내주는 조금 정돈된 _Pretty URL_ 을 만들어주는 역할만 한다.
 
-다양한 Endpoint로 인해 각 요청을 제어하기 어려워보이지만 아래 초기화 과정에서 "대부분의 요청"에 개입할 수 있다.
+다양한 Endpoint로 인해 각 요청을 제어하기 어려워보이지만 아래 초기화 과정에서 Hook을 이용해 "대부분의 요청"과 일부 데이터 처리에 개입할 수 있다.
 
 ## 초기화
 
@@ -67,7 +69,7 @@ URL로 요청된 경로의 파일이 요청을 처리하게되며 대부분은 H
 
 버퍼에서 JS, CSS 파일과 환경설정 등에서 설정한 `<meta>`태그를 `<head>` 등 적절한 위치에 삽입해준다.
 
-::: info >= 5.5.8.2.6 버전
+::: info >= 5.5.8.2.6
 이런 처리가 완료된 후 버퍼의 내용을 출력하기 전 마지막으로 `html_process_buffer` Replace Hook을 실행한다.
 :::
 

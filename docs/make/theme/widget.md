@@ -3,7 +3,9 @@ head:
   - - link
     - name: canonical
       content: https://g5guide.github.io/make/theme/widget.html
+description: 그누보드에서 메뉴 관리를 통해 만든 메뉴를 출력하거나 게시판의 최근게시물 등을 출력하는 위젯 기능을 제공한다.
 ---
+
 # 메뉴 및 위젯
 
 ## 메뉴
@@ -20,25 +22,25 @@ get_menu_db(1);
 // get_menu_db() 함수가 반환하는 배열 형태
 // 주요 속성 일부만 표시하고 나머지는 생략한 예시이다
 // 메뉴 트리의 깊이가 최대 2단계이다
-array(
-  0 => array(
+[
+  [
     'me_name' => '공지사항',
     'me_link' => 'https://.../bbs/board.php?bo_table=notice',
-    'sub' => array(
-    ),
-  ),
-  1 => array(
+    'sub' => [
+    ],
+  ],
+  [
     'me_name' => '커뮤니티',
     'me_link' => 'https://.../bbs/group.php?gr_id=community',
-    'sub' => array(
-      0 => array(
+    'sub' => [
+      [
         'me_name' => '자유게시판',
         'me_link' => 'https://.../bbs/board.php?bo_table=free',
         // 서브메뉴는 자신의 하위에 서브메뉴를 가질 수 없음
-      ),
-    ),
-  ),
-);
+      ],
+    ],
+  ],
+];
 ```
 
 ## 위젯
@@ -54,6 +56,8 @@ latest('theme/basic');
 ```
 
 ### 아웃로그인
+
+로그인 폼 또는 간략한 회원의 로그인 상태를 보여준다.
 
 ```php
 outlogin('theme/basic');

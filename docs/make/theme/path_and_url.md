@@ -3,7 +3,9 @@ head:
   - - link
     - name: canonical
       content: https://g5guide.github.io/make/theme/path_and_url.html
+description: 그누보드의 테마에서 참조할 수 있는 URL 또는 서버 내 경로를 담은 상수를 사용할 수 있다. URL은 JS, CSS 그리고 이미지 등의 리소스를 참조할 때 사용하며, 경로는 PHP 파일을 참조할 때 사용한다.
 ---
+
 # 테마 경로 및 URL
 
 `G5_BBS_URL`처럼 테마 경로를 기반으로 서버 내 경로 및 URL을 담은 상수를 사용할 수 있다.

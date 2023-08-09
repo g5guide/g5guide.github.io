@@ -4,6 +4,7 @@ head:
     - name: canonical
       content: https://g5guide.github.io/developers/sql_injection.html
 ---
+
 # SQL Injection
 
 그누보드는 PHP의 MySQL/MySQLi API를 사용하고 있으며, Prepared Statement를 사용하지 않는다. [오염된 전역변수](/developers/polluted_variables) 문제가 더해져 사용자 입력 변수와 전역변수의 데이터에 모두 위험성이 존재하며, SQL 질의문을 문자열에 변수를 직접 조합하므로 SQL 인젝션 공격에 취약하다.
@@ -16,12 +17,12 @@ MySQLi API에서 바인딩을 사용할 수 있지만 그누보드에서는 이�
 
 ```php
 // $connect_db 전역변수를 사용
-$stmt = mysqli_prepare($connect_db, 'SELECT * FROM g5_member WHERE mb_id = ?');
-mysqli_stmt_bind_param($stmt, "s", $memberId);
+$stmt = mysqli_prepare(
+    $connect_db,
+    'SELECT * FROM `g5_member` WHERE `mb_id` = ?'
+);
+$stmt->bind_param('s', $memberId);
 
 $memberId = 'admin';
-
-mysqli_stmt_execute($stmt);
+$stmt->execute();
 ```
-
-## PDO 사용하기

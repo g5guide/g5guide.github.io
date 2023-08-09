@@ -3,22 +3,21 @@ head:
   - - link
     - name: canonical
       content: https://g5guide.github.io/make/skin/outlogin.html
+description: 아웃로그인 위젯은 그누보드의 회원 로그인 상태에 따라 로그인 폼과 회원의 간략한 정보를 표시한다.
 ---
+
 # 아웃로그인 스킨
 
 아웃로그인 스킨은 로그인 상태에 따라 파일이 나뉘어있다.
 
-|파일명|ㅁㄴㅇㄹ|
-|---|---|
-|outlogin.skin.1.php|로그인하지 않은 상태. 아이디/비밀번호 입력 폼 표시|
-|outlogin.skin.2.php|로그인 후 회원의 정보 등을 표시|
-
+| 파일명              | 설명                                               |
+| ------------------- | -------------------------------------------------- |
+| outlogin.skin.1.php | 로그인하지 않은 상태. 아이디/비밀번호 입력 폼 표시 |
+| outlogin.skin.2.php | 로그인 후 회원의 정보 등을 표시                    |
 
 ## 로그인 폼
 
 outlogin.skin.1.php
-
-
 
 ## 회원 정보
 
