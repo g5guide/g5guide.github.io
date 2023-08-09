@@ -1,8 +1,5 @@
 import { defineConfig } from 'vitepress';
 import deepmerge from 'deepmerge';
-import { SitemapStream } from 'sitemap';
-import { createWriteStream } from 'node:fs';
-import { resolve } from 'node:path';
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import timeline from "vitepress-markdown-timeline";
 
@@ -26,15 +23,6 @@ if (process.env.NODE_ENV === 'production') {
             'meta',
             { name: 'msvalidate.01', content: 'B4DA8C58849C0563FAE8F91A627C7500' }
         ],
-        // [
-        //     'script',
-        //     { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-GNLLQFYG4H' }
-        // ],
-        // [
-        //     'script',
-        //     {},
-        //     "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-GNLLQFYG4H');"
-        // ]
     ]
 } else {
     mergeConfig = {
@@ -51,7 +39,7 @@ export default defineConfig(deepmerge(mergeConfig, {
     base: '/',
     lastUpdated: true,
     themeConfig: {
-        siteTitle: 'GNUBOARD 5 Guide',
+        siteTitle: '그누보드5 가이드',
         outline: [2, 4],
         sidebar: {
             '/gnuboard/': [
@@ -181,6 +169,9 @@ export default defineConfig(deepmerge(mergeConfig, {
         socialLinks: [
             { icon: 'github', link: 'https://github.com/g5guide/g5guide.github.io' },
         ],
+        search: {
+            provider: 'local'
+        },
         editLink: {
             pattern: 'https://github.com/g5guide/g5guide.github.io/edit/main/docs/:path',
             text: '이 페이지 수정하기'
@@ -192,6 +183,9 @@ export default defineConfig(deepmerge(mergeConfig, {
         footer: {
             message: '<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="크리에이티브 커먼즈 라이선스" style="display: inline-block;border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />이 저작물은 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 4.0 국제 라이선스</a>에 따라 이용할 수 있습니다.'
         },
+    },
+    sitemap: {
+        hostname: 'https://g5guide.github.io/',
     },
     transformHtml: (_, id, { pageData }) => {
         if (!/[\\/]404\.html$/.test(id))
@@ -207,14 +201,4 @@ export default defineConfig(deepmerge(mergeConfig, {
             md.use(timeline);
         }
     },
-    buildEnd: async ({ outDir }) => {
-        const sitemap = new SitemapStream({
-            hostname: 'https://g5guide.github.io/'
-        })
-        const writeStream = createWriteStream(resolve(outDir, 'sitemap.xml'))
-        sitemap.pipe(writeStream)
-        links.forEach((link) => sitemap.write(link))
-        sitemap.end()
-        await new Promise((r) => writeStream.on('finish', r))
-    }
 }));
