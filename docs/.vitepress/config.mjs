@@ -66,6 +66,7 @@ export default defineConfig(deepmerge(mergeConfig, {
                 {
                     text: '운영 & 관리',
                     items: [
+                        { text: '개인정보', link: '/gnuboard/privacy' },
                         { text: '업데이트' },
                     ]
                 },
