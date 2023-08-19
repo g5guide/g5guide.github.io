@@ -19,7 +19,7 @@ head:
 │   └── shop.extend.php // 파일 삭제 // [!code --]
 ├── mobile
 │   ├── shop // 폴더 전체 삭제 // [!code --]
-│   └── mobile
+│   └── skin
 │       └── shop // 폴더 전체 삭제 // [!code --]
 ├── shop // 폴더 전체 삭제 // [!code --]
 ├── skin
