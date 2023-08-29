@@ -2,7 +2,7 @@
 head:
   - - link
     - name: canonical
-      content: https://g5guide.github.io/make/skin/outlogin.html
+      content: https://g5guide.github.io/make/theme.html
 ---
 # 테마의 기본 구조
 
