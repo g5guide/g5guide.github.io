@@ -46,6 +46,9 @@ jobs:
         run: |
           npm run docs:build # or pnpm docs:build / yarn docs:build
           touch docs/.vitepress/dist/.nojekyll
+          touch docs/.nojekyll
+      - name: Setup IndexNow
+        run: echo ${{ secrets.INDEXNOW_KEY }} > docs/.vitepress/dist/${{ secrets.INDEXNOW_KEY }}.txt
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
@@ -63,3 +66,14 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    name: IndexNow Action
+    steps:
+      - name: IndexNow Action
+        uses: bojieyang/indexnow-action@v1
+        with:
+          sitemap-location: 'https://g5guide.github.io/sitemap.xml'
+          key: ${{ secrets.INDEXNOW_KEY }}
