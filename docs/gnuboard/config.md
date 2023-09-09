@@ -17,10 +17,6 @@ head:
 
 관리페이지 폴더명을 `adm`에서 `my_backoffice`로 변경하는 예시이다.
 
-::: info
-그누보드 패치 시 `config.php` 파일을 확인없이 덮어쓰지 않도록 주의해야 한다. 덮어 썼다면 `G5_ADMIN_DIR` 값을 다시 변경해두자.
-:::
-
 ```shell
 # shell 에서 폴더명을 변경하거나 FTP 프로그램을 사용하여 폴더명을 변경한다
 .
@@ -37,6 +33,10 @@ define('G5_ADMIN_DIR',      'my_backoffice'); // [!code ++]
 ```
 
 관리페이지는 변경한 폴더명으로 `http://.../my_backoffice` 주소로 접근할 수 있다.
+
+::: info
+그누보드 패치 시 `config.php` 파일을 확인없이 덮어쓰지 않도록 주의해야 한다. 덮어 썼다면 `G5_ADMIN_DIR` 값을 다시 변경해두자.
+:::
 
 ## 미사용 영카트 제거
 
