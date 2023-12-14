@@ -3,6 +3,7 @@ head:
   - - link
     - name: canonical
       content: https://g5guide.github.io/developers/hook.html
+description: 그누보드 hook 사용법
 ---
 # Hook
 
@@ -37,7 +38,7 @@ Hook 유형에 따라 `add_event()`와 `add_replace()` 두 가지 함수를 사�
  * @param int $priority 실행 우선 순위
  *            기본 값인 G5_HOOK_DEFAULT_PRIORITY는 int(8)이다
  * @param int $args 콜백에 전달될 인자의 갯수
- * @return void;
+ * @return void
  */
 add_event($tag, $callback, $priority = G5_HOOK_DEFAULT_PRIORITY, $args = 0);
 
@@ -49,7 +50,7 @@ add_event($tag, $callback, $priority = G5_HOOK_DEFAULT_PRIORITY, $args = 0);
  * @param int $priority 실행 우선 순위
  *            기본 값인 G5_HOOK_DEFAULT_PRIORITY는 int(8)이다
  * @param int $args 콜백에 전달될 인자의 갯수
- * @return true|void;
+ * @return true|void
  */
 add_replace($tag, $callback, $priority = G5_HOOK_DEFAULT_PRIORITY, $args = 0);
 ```

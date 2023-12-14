@@ -1,9 +1,8 @@
 ---
 head:
-  - - link
-    - name: canonical
-      content: https://g5guide.github.io/make/skin.html
+  - - meta
+    - http-equiv: refresh
+      content: 0; url=https://g5guide.github.io/make/skin/about.html
 ---
-# 스킨 만들기
 
-TBD
+[변경된 주소로 바로가기](https://g5guide.github.io/make/skin/about.html)

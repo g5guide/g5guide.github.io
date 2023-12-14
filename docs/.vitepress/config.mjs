@@ -48,30 +48,77 @@ export default defineConfig(deepmerge(mergeConfig, {
                     items: [
                         { text: '설치', link: '/gnuboard/install' },
                         { text: '초기 설정', link: '/gnuboard/config' },
-                        { text: '테마 & 스킨', link: '/gnuboard/theme_skin' },
-                        { text: '회원' },
-                        { text: '포인트' },
-                        { text: '짧은 주소' },
+                        { text: '한 줄 팁', link: '/gnuboard/tip' },
                     ]
                 },
                 {
-                    text: '환경 설정',
+                    text: '기본',
                     items: [
-                        { text: '기본 환경' },
-                        { text: '관리 권한' },
-                        { text: '테마' },
-                        { text: '메뉴' },
+                        { text: '회원', link: '/gnuboard/member' },
+                        { text: '환경 설정', link: '/gnuboard/basic-config' },
+                        { text: '테마와 스킨', link: '/gnuboard/theme-and-skin' },
+                        { text: '게시판과 그룹', link: '/gnuboard/board' },
+                        { text: '포인트', link: '/gnuboard/point' },
+                        { text: '메뉴', link: '/gnuboard/menu' },
                     ]
                 },
                 {
                     text: '운영 & 관리',
                     items: [
                         { text: '개인정보', link: '/gnuboard/privacy' },
-                        { text: '업데이트' },
+                        { text: '영카트 제거하기', link: '/gnuboard/remove-youngcart' },
+                        { text: '업데이트', link: '/gnuboard/upgrade' },
                     ]
                 },
             ],
             '/make/': [
+                {
+                    text: '스킨 만들기',
+                    items: [
+                        { text: '개요', link: '/make/skin/about' },
+                        {
+                            text: '게시판 스킨 (board)',
+                            link: '/make/skin/board',
+                            collapsed: true,
+                            items: [
+                                { text: '개요', link: '/make/skin/board' },
+                                { text: '목록', link: '/make/skin/board/list' },
+                                { text: '내용 보기', link: '/make/skin/board/view' },
+                                { text: '댓글', link: '/make/skin/board/comment' },
+                                { text: '글 쓰기', link: '/make/skin/board/write' },
+                                { text: '액션', link: '/make/skin/board/action' },
+                            ],
+                        },
+                        { text: 'Content 스킨 (content)' },
+                        { text: 'FAQ 스킨 (faq)' },
+                        { text: '회원 스킨 (member)' },
+                        { text: '새글 스킨 (new)' },
+                        {
+                            text: '1:1문의 스킨 (qa)',
+                            collapsed: true,
+                            items: [
+                                { text: '개요' },
+                                { text: '목록' },
+                                { text: '내용 보기' },
+                                { text: '댓글' },
+                                { text: '글 쓰기' },
+                            ],
+                        },
+                        { text: '전체검색 스킨 (search)' },
+                        { text: '소셜로그인 스킨 (social)' },
+                        { text: '접속자 스킨 (visit)' },
+                        {
+                            text: '위젯',
+                            items: [
+                                { text: '접속자 스킨 (connect)' },
+                                { text: '최신글 스킨 (latest)', link: '/make/skin/latest' },
+                                { text: '아웃로그인 스킨 (outlogin)', link: '/make/skin/outlogin' },
+                                { text: '설문조사 스킨 (poll)' },
+                                { text: '인기검색어 스킨 (popular)' },
+                            ],
+                        },
+                    ],
+                },
                 {
                     text: '테마 만들기',
                     items: [
@@ -80,26 +127,6 @@ export default defineConfig(deepmerge(mergeConfig, {
                         { text: '레이아웃', link: '/make/theme/layout' },
                         { text: '경로 및 URL', link: '/make/theme/path_and_url' },
                         { text: '메뉴 및 위젯', link: '/make/theme/widget' },
-                    ],
-                },
-                {
-                    text: '스킨 만들기',
-                    collapsible: true,
-                    items: [
-                        { text: '게시판 스킨 (board)', link: '/make/skin/board' },
-                        { text: '접속자 스킨 (connect)' },
-                        { text: '페이지 스킨 (content)' },
-                        { text: 'FAQ 스킨 (faq)' },
-                        { text: '최신게시물 스킨 (latest)' },
-                        { text: '회원 스킨 (member)' },
-                        { text: '새글 스킨 (new)' },
-                        { text: '아웃로그인 스킨 (outlogin)', link: '/make/skin/outlogin' },
-                        { text: '설문조사 스킨 (poll)' },
-                        { text: '인기검색어 스킨 (popular)' },
-                        { text: 'Q&A 스킨 (qa)' },
-                        { text: '전체검색 스킨 (search)' },
-                        { text: '소셜로그인 스킨 (social)' },
-                        { text: '접속자 스킨 (visit)' },
                     ],
                 },
                 {
@@ -163,8 +190,8 @@ export default defineConfig(deepmerge(mergeConfig, {
         },
         nav: [
             { text: '그누보드', link: '/gnuboard/install' },
+            { text: '스킨', link: '/make/skin/about' },
             { text: '테마', link: '/make/theme/about' },
-            { text: '스킨', link: '/make/skin' },
             { text: '개발자 가이드', link: '/developers/lifecycle' },
         ],
         socialLinks: [

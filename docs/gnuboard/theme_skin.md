@@ -1,12 +1,8 @@
 ---
 head:
-  - - link
-    - name: canonical
-      content: https://g5guide.github.io/gnuboard/theme_skin.html
+  - - meta
+    - http-equiv: refresh
+      content: 0; url=https://g5guide.github.io/gnuboard/theme-and-skin.html
 ---
-# 테마 & 스킨
 
-TBD
-
-- 테마, 스킨 선택의 간단한 가이드
-- 테마, 스킨 제작 가이드 링크
+[변경된 주소로 바로가기](https://g5guide.github.io/gnuboard/theme-and-skin.html)

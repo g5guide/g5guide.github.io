@@ -41,5 +41,5 @@ function add_javascript($javascript, $order = 0);
 
 아래의 플러그인 중 선택해서 사용하는 걸 권장한다.
 
-- https://sir.kr/g5_plugin/10851
+- [CacheBust](https://sir.kr/g5_plugin?sca=&sfl=wr_subject&stx=kg+cachebust)
 - https://sir.kr/g5_plugin/10198

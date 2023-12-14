@@ -3,6 +3,7 @@ head:
   - - link
     - name: canonical
       content: https://g5guide.github.io/gnuboard/config.html
+description: 그누보드 설치 후 초기 설정 및 관리페이지 주소 변경, 영카트 제거, 사이트 기본 설정, 짧은 주소, 게시판 설정 등 주요 설정.
 ---
 
 # 초기 설정
@@ -20,19 +21,20 @@ head:
 ```shell
 # shell 에서 폴더명을 변경하거나 FTP 프로그램을 사용하여 폴더명을 변경한다
 .
-├── adm // [!code --]
-├── my_backoffice // [!code ++]
-└── config.php
+├── adm # [!code --]
+├── my_backoffice # [!code ++]
+├── config.php
+└── index.php
 ```
 
 `config.php` 파일에서 `G5_ADMIN_DIR` 상수의 값을 변경해준다.
 
 ```php
-define('G5_ADMIN_DIR',      'adm'); // [!code --]
-define('G5_ADMIN_DIR',      'my_backoffice'); // [!code ++]
+define('G5_ADMIN_DIR', 'adm'); // [!code --]
+define('G5_ADMIN_DIR', 'my_backoffice'); // [!code ++]
 ```
 
-관리페이지는 변경한 폴더명으로 `http://.../my_backoffice` 주소로 접근할 수 있다.
+관리페이지는 변경한 폴더명으로 `https://.../my_backoffice` 주소로 접근할 수 있다.
 
 ::: info
 그누보드 패치 시 `config.php` 파일을 확인없이 덮어쓰지 않도록 주의해야 한다. 덮어 썼다면 `G5_ADMIN_DIR` 값을 다시 변경해두자.
@@ -42,39 +44,42 @@ define('G5_ADMIN_DIR',      'my_backoffice'); // [!code ++]
 
 영카트(쇼핑몰) 기능을 사용하지 않는다면 영카트 관련 폴더와 파일들을 삭제할 것을 권장한다. 보안취약점이 발생하면 영향을 받을 수 있기 때문에 영카트 기능을 사용하지 않는다면 아예 제거해두는 것이 좋다.
 
-```txt
+```shell
 .
 ├── adm
-│   └── shop_admin // 폴더 전체 삭제 // [!code --]
+│   └── shop_admin // 폴더 전체 삭제 # [!code --]
 ├── extend
-│   └── shop.extend.php // 파일 삭제 // [!code --]
+│   └── shop.extend.php // 파일 삭제 # [!code --]
+├── lib
+│   ├── shop.uri.lib.php // 파일 삭제 # [!code --]
+│   └── shop.lib.php // 파일 삭제 # [!code --]
 ├── mobile
-│   └── shop // 폴더 전체 삭제 // [!code --]
-├── shop // 폴더 전체 삭제 // [!code --]
-├── orderupgrade.php // 파일 삭제 // [!code --]
-├── shop.config.php // 파일 삭제 // [!code --]
-├── yc4_import_run.php // 파일 삭제 // [!code --]
-└── yc4_import.php // 파일 삭제 // [!code --]
+│   └── shop // 폴더 전체 삭제 # [!code --]
+├── shop // 폴더 전체 삭제 # [!code --]
+├── orderupgrade.php // 파일 삭제 # [!code --]
+├── shop.config.php // 파일 삭제 # [!code --]
+├── yc4_import_run.php // 파일 삭제 # [!code --]
+└── yc4_import.php // 파일 삭제 # [!code --]
 ```
 
 추가로 테마와 스킨에서도 영카트 관련 파일을 제거하는 것을 권장한다.
 
-```txt
+```shell
 .
 ├── mobile
 │   └── skin
-│       └── shop // 폴더 전체 삭제 // [!code --]
+│       └── shop // 폴더 전체 삭제 # [!code --]
 ├── skin
-│   └── shop // 폴더 전체 삭제 // [!code --]
+│   └── shop // 폴더 전체 삭제 # [!code --]
 └── theme
     └── basic
-        ├── shop // 폴더 전체 삭제 // [!code --]
+        ├── shop // 폴더 전체 삭제 # [!code --]
         ├── mobile
-        │   ├── shop // 폴더 전체 삭제 // [!code --]
+        │   ├── shop // 폴더 전체 삭제 # [!code --]
         │   └── skin
-        │       └── shop // 폴더 전체 삭제 // [!code --]
+        │       └── shop // 폴더 전체 삭제 # [!code --]
         └── skin
-            └── shop // 폴더 전체 삭제 // [!code --]
+            └── shop // 폴더 전체 삭제 # [!code --]
 ```
 
 ::: warning 위험은 미리 피하자
@@ -104,12 +109,21 @@ define('G5_ADMIN_DIR',      'my_backoffice'); // [!code ++]
 
 - 아이디,닉네임 금지단어
   - 일부 기본 값이 설정되어 있으나 사이트 이름이나 도메인 및 사이트 유형에 따라 필요한 단어를 아이디, 닉네임에 사용하지 못하도록 추가 설정해두는 것이 좋다
+    ::: info
+    이 설정은 비회원의 글쓴이 이름에는 적용되지 않는다.
+    :::
 - 회원가입약관 & 개인정보처리방침
-  - 당장 설정하지 못하더라도 회원가입 등 개인정보를 수집하는 하려면 반드시 게시해야하는 내용이 잊지 말고 설정해야 한다
+  - 당장 설정하지 못하더라도 회원가입 등 개인정보를 수집하는 하려면 반드시 게시해야하는 내용을 잊지 말고 설정해야 한다
 
 ### 짧은 주소 설정
 
-짧은 주소 설정은 처음 선택 후 변경하지 않는 것이 좋다. 사이트 운영 중 변경하면 기존 주소 체계에 영향을 주므로 주의해야 한다. "숫자" 형식을 권장한다
+짧은 주소 설정은 처음 선택 후 변경하지 않는 것이 좋다. 사이트 운영 중 변경하면 기존 주소 체계에 영향을 주므로 주의해야 한다. "숫자" 형식을 권장한다.
+
+::: warning
+글의 제목을 주소로 사용하는 "글 이름" 형식은 글 제목이 변경되면 글의 주소 또한 변경되므로 검색엔진의 노출이나 링크가 깨지는 문제가 있으므로 _절대 사용하지 말자_.
+
+또한, 같은 제목을 가진 글이 여럿일 때 주소의 중복을 피하기 위한 대처가 되어있지만, 불완전하여 주소가 중복되거나 변경되는 문제가 발견되었다. 그누보드 이슈 [#293](https://github.com/gnuboard/gnuboard5/issues/293) [#294](https://github.com/gnuboard/gnuboard5/issues/294) [#295](https://github.com/gnuboard/gnuboard5/issues/295)
+:::
 
 ## 게시판 설정
 
