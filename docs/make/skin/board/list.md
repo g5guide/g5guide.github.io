@@ -2,7 +2,7 @@
 head:
   - - link
     - name: canonical
-      content: https://g5guide.github.io/make/skin/board.html
+      content: https://g5guide.github.io/make/skin/board/list.html
 description: 그누보드의 게시판 스킨을 만들기 위해 알아야 할 게시판 스킨의 구조와 스킨에서 사용할 수 있는 변수를 확인하고 사용해야 한다.
 ---
 
@@ -56,11 +56,10 @@ description: 그누보드의 게시판 스킨을 만들기 위해 알아야 할 
 
 그누보드에 포함된 `basic` 스킨은 아래처럼 `for()`문을 사용한다. 가독성이 떨어지고 중첩된 반복문에서 실수를 유발할 수 있기 때문에 위 예시처럼 `foreach()` 반복문을 사용하는 것을 권장한다.
 
-```php
+<!-- prettier-ignore -->
+```html
 <?php for ($i = 0; $i < count($list); $i++) { ?>
-    ...
     제목: <?= $list[$i]['subject'] ?>
-    ...
 <?php } ?>
 ```
 
@@ -72,16 +71,18 @@ description: 그누보드의 게시판 스킨을 만들기 위해 알아야 할 
 
 `subject`에는 글 제목, `href`에는 글 주소가 담겨있다.
 
+<!-- prettier-ignore -->
 ```html
 <!-- 예시: 글 제목에 링크 걸기 -->
 <a href="<?= $article['href'] ?>">
-  <?= $article['subject'] ?>
+    <?= $article['subject'] ?>
 </a>
 ```
 
 ::: info
 `subject`에는 게시판 검색 시 제목에서 검색어 강조를 위한 `<b>` 태그가 포함되어 있다. 검색 결과를 표시하기 위해 `subject`를 사용하는 것을 권장한다.
 
+<!-- prettier-ignore -->
 ```html
 <!-- 원본 제목: $article['wr_subject'] -->
 강조 표시된 제목
@@ -94,13 +95,15 @@ description: 그누보드의 게시판 스킨을 만들기 위해 알아야 할 
 
 ### 카테고리
 
-```php
+<!-- prettier-ignore -->
+```html
 카테고리 이름: <?= $article['ca_name'] ?>
 ```
 
 `$is_category`(bool) 전역변수로 카테고리 사용 여부를 확인하여 출력
 
-```php
+<!-- prettier-ignore -->
+```html
 <?php if ($is_category) { ?>
     카테고리 이름: <?= $article['ca_name'] ?>
 <?php } ?>
@@ -108,7 +111,8 @@ description: 그누보드의 게시판 스킨을 만들기 위해 알아야 할 
 
 `ca_name_href` 키로 카테고리로 검색하는 링크를 걸 수 있다. 게시판 검색 기능으로 카테고리 명칭으로 검색한 글 목록을 표시한다.
 
-```php
+<!-- prettier-ignore -->
+```html
 <a href="<?= $article['ca_name_href'] ?>">
     <?= $article['ca_name'] ?>
 </a>
@@ -118,7 +122,8 @@ description: 그누보드의 게시판 스킨을 만들기 위해 알아야 할 
 
 `name`에는 글쓴이의 정보를 보거나 부가 기능을 위한 메뉴를 표시하는 "사이드뷰" 기능을 위해 `<span>` 태그로 감싼 메뉴가 포함되어 있다. 사이드뷰 태그가 포함되지 않은 원본 이름은 `wr_name`에 담겨있다.
 
-```php
+<!-- prettier-ignore -->
+```html
 작성자: <?= $article['name'] ?>
 작성자: <?= $article['wr_name'] ?>
 
@@ -131,7 +136,8 @@ description: 그누보드의 게시판 스킨을 만들기 위해 알아야 할 
 
 작성일시는 `wr_datetime`과 `datetime`, `datetime2`로 구분되어 날짜 표시 형식을 다르게 표시할 수 있다. `datetime2`는 작성 당일에는 `시:분`으로 표시되며, 작성 당일이 지난 글은 `월-일`로 표시된다.
 
-```php
+<!-- prettier-ignore -->
+```html
 작성일(년-월-일 시-분-초): <?= $article['wr_datetime'] ?>
 작성일(년-월-일): <?= $article['datetime'] ?>
 작성일(가변): <?= $article['datetime2'] ?>
@@ -150,7 +156,8 @@ description: 그누보드의 게시판 스킨을 만들기 위해 알아야 할 
 
 조회 수는 1천 단위 이상일 때 읽기 쉽게 표시하기 위해 `number_format()` 함수를 사용하면 좋다.
 
-```php
+<!-- prettier-ignore -->
+```html
 조회수: <?= $article['wr_hit'] ?>
 조회수: <?= number_format((float) $article['wr_hit']) ?>
 
@@ -163,7 +170,8 @@ description: 그누보드의 게시판 스킨을 만들기 위해 알아야 할 
 
 `$is_good`(bool), `$is_nogood`(bool)으로 추천, 비추천 기능의 활성화 여부를 확인하고 표시하는 것이 좋다.
 
-```php
+<!-- prettier-ignore -->
+```html
 <?php if ($is_good) { ?>
     추천 수: <?= $article['wr_good'] ?>
 <?php } ?>
@@ -175,7 +183,8 @@ description: 그누보드의 게시판 스킨을 만들기 위해 알아야 할 
 
 기능이 활성화 되어있고 추천/비추천 수가 있을 때(1 이상)만 표시하려면...
 
-```php
+<!-- prettier-ignore -->
+```html
 <?php if ($is_good && !!$article['wr_good']) { ?>
     추천 수: <?= $article['wr_good'] ?>
 <?php } ?>
@@ -187,13 +196,15 @@ description: 그누보드의 게시판 스킨을 만들기 위해 알아야 할 
 
 ### 댓글
 
-```php
+<!-- prettier-ignore -->
+```html
 댓글 수 : <?= $article['wr_comment'] ?>
 ```
 
 댓글이 있는지 구분하려면 `wr_comment` 값을 확인하면 된다.
 
-```php
+<!-- prettier-ignore -->
+```html
 <?php if (!!$article['wr_comment']) { ?>
     댓글 수: <?= $article['wr_comment'] ?>
 <?php } ?>
@@ -240,87 +251,6 @@ description: 그누보드의 게시판 스킨을 만들기 위해 알아야 할 
 `wr_last`는 마지막에 작성된 댓글의 작성일시이며, 마지막 댓글이 삭제되면 그 이전에 작성된 댓글의 작성일시로 변경되므로 이 값을 활용할 때 용도에 맞는지 주의해야 한다.
 :::
 
-```php
-$list = array(
-  0 => array(
-    "wr_id" => "3028"
-    "wr_num" => "-3013"
-    "wr_reply" => ""
-    "wr_parent" => "3028"
-    "wr_is_comment" => "0"
-    "wr_comment" => "0"
-    "wr_comment_reply" => ""
-    "ca_name" => "연예"
-    "wr_option" => "html1"
-    "wr_subject" => "3027"
-    "wr_content" => "<p>3027302730273027</p>"
-    "wr_seo_title" => "3027"
-    "wr_link1" => ""
-    "wr_link2" => ""
-    "wr_link1_hit" => "0"
-    "wr_link2_hit" => "0"
-    "wr_hit" => "2"
-    "wr_good" => "0"
-    "wr_nogood" => "0"
-    "mb_id" => "admin"
-    "wr_password" => ""
-    "wr_name" => "최고관리자"
-    "wr_email" => "admin@domain.com"
-    "wr_homepage" => ""
-    "wr_datetime" => "2023-12-06 12:56:25"
-    "wr_file" => "0"
-    "wr_last" => "2023-12-06 12:56:25"
-    "wr_ip" => "::1"
-    "wr_facebook_user" => ""
-    "wr_twitter_user" => ""
-    "wr_1" => ""
-    "wr_2" => ""
-    "wr_3" => ""
-    "wr_4" => ""
-    "wr_5" => ""
-    "wr_6" => ""
-    "wr_7" => ""
-    "wr_8" => ""
-    "wr_9" => ""
-    "wr_10" => ""
-    "is_notice" => false
-    "subject" => "3027"
-    "comment_cnt" => ""
-    "datetime" => "2023-12-06"
-    "datetime2" => "12-06"
-    "last" => "2023-12-06"
-    "last2" => "12-06"
-    "name" => ""
-    "reply" => 0
-    "icon_reply" => ""
-    "icon_link" => ""
-    "ca_name_href" => "https://kkigomi.duckdns.org/free?sca=%EC%97%B0%EC%98%88"
-    "href" => "https://kkigomi.duckdns.org/free/3028"
-    "comment_href" => "https://kkigomi.duckdns.org/free/3028"
-    "icon_new" => ""
-    "icon_hot" => ""
-    "icon_secret" => ""
-    "link" => array(
-      1 => null
-      2 => null
-    )
-    "link_href" => array:2 [
-      1 => "https://kkigomi.duckdns.org/bbs/link.php?bo_table=free&amp;wr_id=3028&amp;no=1"
-      2 => "https://kkigomi.duckdns.org/bbs/link.php?bo_table=free&amp;wr_id=3028&amp;no=2"
-    ]
-    "link_hit" => array:2 [
-      1 => 0
-      2 => 0
-    ]
-    "file" => array:1 [
-      "count" => "0"
-    ]
-    "list_content" => "<p>3027302730273027</p>"
-    "num" => 2817
-  ]
-]
-```
-
 ## 목록 정렬
 
 ## 카테고리 목록
@@ -338,7 +268,8 @@ $list = array(
 | `$from_record`  | `int`    | 시작 열의 인덱스(0부터 시작)                                                             |
 | `$write_pages`  | `string` | 페이지 이동 네비게이션<br>현재 페이지를 가리키고 다른 페이지로 이동하는 링크를 담은 HTML |
 
-```php
+<!-- prettier-ignore -->
+```html
 게시물 수: <?= number_format((int) $total_count) ?>
 공지사항 수: <?= number_format((int) $notice_count) ?>
 전체 페이지 수: <?= number_format($total_page) ?>
@@ -375,7 +306,8 @@ echo number_format((float) $total_page); // 1,234
 
 글 쓰기 페이지 링크는 `$write_href` 전역변수
 
-```php
+<!-- prettier-ignore -->
+```html
 <?php if ($write_href) { ?>
     <a href="<?= $write_href ?>">글 쓰기</a>
 <?php } ?>
@@ -383,7 +315,8 @@ echo number_format((float) $total_page); // 1,234
 
 게시판 설정 링크는 `$admin_href` 전역변수
 
-```php
+<!-- prettier-ignore -->
+```html
 <?php if ($admin_href) { ?>
     <a href="<?= $admin_href ?>">게시판 설정</a>
 <?php } ?>
@@ -391,7 +324,8 @@ echo number_format((float) $total_page); // 1,234
 
 RSS 링크는 `$rss_href` 전역변수
 
-```php
+<!-- prettier-ignore -->
+```html
 <?php if ($rss_href) { ?>
     <a href="<?= $rss_href ?>">RSS</a>
 <?php } ?>

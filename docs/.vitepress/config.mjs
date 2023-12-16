@@ -165,7 +165,13 @@ export default defineConfig(deepmerge(mergeConfig, {
                     text: '확장하기',
                     items: [
                         { text: '플러그인', link: '/developers/make_plugin' },
-                        { text: 'Hook', link: '/developers/hook' },
+                        {
+                            text: 'Hook',
+                            link: '/developers/hook',
+                            items: [
+                                { text: 'Hook 목록', link: '/developers/hook-list' },
+                            ],
+                        },
                         { text: '관리 메뉴', link: '/developers/admin_menu' },
                         { text: '테마', link: '/make/theme/about' },
                         { text: '스킨', link: '/make/skin' },

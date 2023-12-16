@@ -10,8 +10,9 @@ import './style.css'
 import "vitepress-markdown-timeline/dist/theme/index.css";
 
 
+/** @type {import('vitepress').Theme} */
 export default {
-    ...DefaultTheme,
+    extends: DefaultTheme,
     enhanceApp({ app, router, siteData }) {
         enhanceAppWithTabs(app);
         googleAnalytics({

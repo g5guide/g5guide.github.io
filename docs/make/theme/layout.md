@@ -12,22 +12,22 @@ description: 레이아웃은 그누보드 테마의 필수 요소이며, 웹사�
 
 공용 레이아웃은 반응형으로 대형 디스플레이부터 소형 디스플레이 기기까지 구성할 수 있으며, 필요에 따라 소형 디스플레이 기기인 모바일 레이아웃을 분리하여 구성할 수 있다.
 
-```txt{3,10-17}
-theme // 테마가 설치된 폴더
-└── basic // 내장된 `basic` 테마의 폴더
-       ├── mobile // 모바일 전용 레이아웃 및 스킨
+```shell{3,10-17}
+theme # 테마가 설치된 폴더
+└── basic # 내장된 `basic` 테마의 폴더
+       ├── mobile # 모바일 전용 레이아웃 및 스킨
        │   ├── _common.php
        │   ├── group.php
        │   ├── head.php
        │   ├── index.php
        │   └── tail.php
        ├── _common.php
-       ├── head.php // [필수] 레이아웃 상단부 파일
+       ├── head.php # [필수] 레이아웃 상단부 파일
        ├── head.sub.php
-       ├── index.php // [필수] index 페이지 파일
-       ├── tail.php // [필수] 레이아웃 하단부 파일
+       ├── index.php # [필수] index 페이지 파일
+       ├── tail.php # [필수] 레이아웃 하단부 파일
        ├── tail.sub.php
-       └── theme.config.php // [필수] 테마 설정 파일
+       └── theme.config.php # [필수] 테마 설정 파일
 ```
 
 ## 공용 레이아웃
@@ -82,17 +82,17 @@ theme // 테마가 설치된 폴더
 
 소형 디스플레이 기기에서는 `mobile` 폴더의 파일이 대신 사용된다. 파일 구성이나 용도는 비슷하지만 `head.sub.php`, `tail.sub.php` 파일은 모바일 전용으로 따로 없으며 테마 루트의 파일이 공통으로 사용된다.
 
-```txt{3,9-10}
-theme // 테마가 설치된 폴더
-└── basic // 내장된 `basic` 테마의 폴더
-       └── mobile // 모바일 전용 레이아웃
+```shell{3,9-10}
+theme # 테마가 설치된 폴더
+└── basic # 내장된 `basic` 테마의 폴더
+       └── mobile # 모바일 전용 레이아웃
        │   ├── _common.php
        │   ├── group.php
        │   ├── head.php
        │   ├── index.php
        │   └── tail.php
-       ├── head.sub.php // 레이아웃 공통
-       └── tail.sub.php // 레이아웃 공통
+       ├── head.sub.php # 레이아웃 공통
+       └── tail.sub.php # 레이아웃 공통
 ```
 
 모바일 모드에서는 `/head.php` 파일 대신 `/mobile/head.php` 파일이 사용된다.

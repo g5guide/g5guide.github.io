@@ -12,28 +12,28 @@ description: 그누보드 테마는 사이트의 레이아웃을 꾸미는데 �
 
 `basic` 테마를 내장하고 있으며, 그누보드를 설치할 때 `basic` 테마가 기본으로 적용된다. `theme` 폴더에 테마 파일을 담고 있으며, `basic` 테마를 예시로 한 구조는 아래와 같다.
 
-```txt{2}
-theme // 테마가 설치된 폴더
-└── basic // 내장된 `basic` 테마의 폴더
+```shell{2}
+theme # 테마가 설치된 폴더
+└── basic # 내장된 `basic` 테마의 폴더
        ├── css
        ├── img
        ├── js
        ├── skin
-       │   ├── board // 게시판 스킨들의 폴더
-       │   ├── connect // 현재 접속자 페이지 스킨
-       │   ├── content // 페이지 컨텐츠 스킨
-       │   ├── faq // FAQ 스킨
-       │   ├── latest // 최신글 스킨
-       │   ├── member // 회원페이지 스킨
-       │   ├── new // 새글 페이지 스킨
-       │   ├── outlogin // 로그인 폼 스킨
-       │   ├── poll // 설문조사 스킨
-       │   ├── popular // 인기검색어 스킨
-       │   ├── qa // QnA 스킨
-       │   ├── search // 검색 결과 스킨
-       │   └── visit // 접속통계 페이지 스킨
-       ├── mobile // 모바일 기기용 레이아웃 및 스킨
-       │   ├── skin // 모바일 기기용 스킨. 위 skin 폴더 구조와 같음
+       │   ├── board    # 게시판 스킨들의 폴더
+       │   ├── connect  # 현재 접속자 페이지 스킨
+       │   ├── content  # 페이지 컨텐츠 스킨
+       │   ├── faq      # FAQ 스킨
+       │   ├── latest   # 최신글 스킨
+       │   ├── member   # 회원페이지 스킨
+       │   ├── new      # 새글 페이지 스킨
+       │   ├── outlogin # 로그인 폼 스킨
+       │   ├── poll     # 설문조사 스킨
+       │   ├── popular  # 인기검색어 스킨
+       │   ├── qa       # QnA 스킨
+       │   ├── search   # 검색 결과 스킨
+       │   └── visit    # 접속통계 페이지 스킨
+       ├── mobile # 모바일 기기용 레이아웃 및 스킨
+       │   ├── skin # 모바일 기기용 스킨. 위 skin 폴더 구조와 같음
        │   │   ├── board
        │   │   ├── ...
        │   │   └── visit
@@ -43,30 +43,30 @@ theme // 테마가 설치된 폴더
        │   ├── index.php
        │   └── tail.php
        ├── _common.php
-       ├── head.php // [필수] 레이아웃 상단부 파일
+       ├── head.php # [필수] 레이아웃 상단부 파일
        ├── head.sub.php
-       ├── index.php // [필수] index 페이지 파일
-       ├── readme.txt // [필수] 테마 정보 파일
+       ├── index.php # [필수] index 페이지 파일
+       ├── readme.txt # [필수] 테마 정보 파일
        ├── screenshot.png
-       ├── tail.php // [필수] 레이아웃 하단부 파일
+       ├── tail.php # [필수] 레이아웃 하단부 파일
        ├── tail.sub.php
-       └── theme.config.php // [필수] 테마 설정 파일
+       └── theme.config.php # [필수] 테마 설정 파일
 ```
 
 ## 주요 구성 파일
 
-```txt{4,6,7,9,11}
-theme // 테마가 설치되는 폴더
-└── basic // 내장된 `basic` 테마의 폴더
+```shell{4,6,7,9,11}
+theme # 테마가 설치되는 폴더
+└── basic # 내장된 `basic` 테마의 폴더
        ├── _common.php
-       ├── head.php // [필수] 레이아웃 상단부 파일
+       ├── head.php # [필수] 레이아웃 상단부 파일
        ├── head.sub.php
-       ├── index.php // [필수] index 페이지 파일
-       ├── readme.txt // [필수] 테마 정보 파일
+       ├── index.php # [필수] index 페이지 파일
+       ├── readme.txt # [필수] 테마 정보 파일
        ├── screenshot.png
-       ├── tail.php // [필수] 레이아웃 하단부 파일
+       ├── tail.php # [필수] 레이아웃 하단부 파일
        ├── tail.sub.php
-       └── theme.config.php // [필수] 테마 설정 파일
+       └── theme.config.php # [필수] 테마 설정 파일
 ```
 
 ### 테마 정보 (readme.txt)
@@ -120,28 +120,28 @@ License URI: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 
 테마는 게시판, 회원 스킨 등을 포함할 수 있으며 `skin` 폴더와 `mobile/skin`에 PC와 모바일 스킨으로 나뉜다. `skin` 폴더 밑에 `board`(게시판), `latest`(최근글) 등 분류별로 나뉘어져있고 분류 밑에 개별 스킨을 넣는다.
 
-```txt{3,5,19,21}
-theme // 테마가 설치된 폴더
-└── basic // 내장된 `basic` 테마의 폴더
+```shell{3,5,19,21}
+theme # 테마가 설치된 폴더
+└── basic # 내장된 `basic` 테마의 폴더
        ├── skin
-       │   ├── board // 게시판 스킨들의 폴더
-       │   │   └── basic // `basic` 이름을 가진 게시판 스킨
-       │   ├── connect // 현재 접속자 페이지 스킨
-       │   ├── content // 페이지 컨텐츠 스킨
-       │   ├── faq // FAQ 스킨
-       │   ├── latest // 최근글 스킨
-       │   ├── member // 회원페이지 스킨
-       │   ├── new // 새글 페이지 스킨
-       │   ├── outlogin // 로그인 폼 스킨
-       │   ├── poll // 설문조사 스킨
-       │   ├── popular // 인기검색어 스킨
-       │   ├── qa // QnA 스킨
-       │   ├── search // 검색 결과 스킨
-       │   └── visit // 접속통계 페이지 스킨
-       └── mobile // 모바일 기기용 레이아웃 및 스킨
-           └── skin // 모바일 기기용 스킨. 위 skin 폴더 구조와 같음
+       │   ├── board # 게시판 스킨들의 폴더
+       │   │   └── basic # `basic` 이름을 가진 게시판 스킨
+       │   ├── connect # 현재 접속자 페이지 스킨
+       │   ├── content # 페이지 컨텐츠 스킨
+       │   ├── faq # FAQ 스킨
+       │   ├── latest # 최근글 스킨
+       │   ├── member # 회원페이지 스킨
+       │   ├── new # 새글 페이지 스킨
+       │   ├── outlogin # 로그인 폼 스킨
+       │   ├── poll # 설문조사 스킨
+       │   ├── popular # 인기검색어 스킨
+       │   ├── qa # QnA 스킨
+       │   ├── search # 검색 결과 스킨
+       │   └── visit # 접속통계 페이지 스킨
+       └── mobile # 모바일 기기용 레이아웃 및 스킨
+           └── skin # 모바일 기기용 스킨. 위 skin 폴더 구조와 같음
                ├── board
-               │   └── basic // `basic` 이름을 가진 모바일용 게시판 스킨
+               │   └── basic # `basic` 이름을 가진 모바일용 게시판 스킨
                ├── ...
                └── visit
 ```

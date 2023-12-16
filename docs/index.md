@@ -14,7 +14,7 @@ features:
   - title: 그누보드
     icon: 😀
     details: (작성 중) 그누보드 일반 사용 가이드
-    link: /gnuboard/index
+    link: /gnuboard/install
   - title: 스킨 만들기
     icon: 🖼️
     details: (작성 중) 스킨 제작 가이드
