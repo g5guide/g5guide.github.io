@@ -1,4 +1,4 @@
-# Hook 이벤트 목록
+# 그누보드 Hook 목록
 
 그누보드 5.5 버전부터 추가된 Hook은 버전을 표기하였음.
 
@@ -40,6 +40,61 @@ add_event('common_header', function () {
 ### alert <Badge type="info" text="Event" />
 
 ### alert_close <Badge type="info" text="Event" />
+
+### 환경설정
+
+::: warning 사용하지 않는 것을 권장
+환경설정을 로드할 때 실행되는 `get_config`, `get_config_cache` Hook은 사용하지 않는 것을 권장한다.
+
+환경설정 데이터는 `get_config()` 함수 내부와 전역변수 `$config`에 캐시되어 재사용되므로, 이 Hook 들이 실행되지 않을 수 있으며, 관리페이지에서 환경설정을 저장할 때 의도하지 않은 문제를 일으킬 가능성이 있다.
+
+필요하다면, 역시 권장하는 방법은 아니지만 `$config` 전역변수를 직접 변경하여 해결하는 것이 낫다. 결코 좋지 않지만 어쩔 수 없이 그나마 이것이 낫다.
+:::
+
+#### get_config <Badge type="info" text="Replace" />
+
+그누보드 환경설정을 가져올 때 실행된다.
+
+::: warning 이 Hook은 실행되지 않을 수 있음
+콜백을 등록할 때는 이미 환경설정 데이터가 로드된 이후이며, 이 데이터는 `get_config()` 함수 내에서 캐시되고 또한 `$config` 전역변수에 데이터를 담아 재사용되므로 이 Hook은 실행되지 않을 수 있다.
+:::
+
+```php
+/**
+ * @param array $config 그누보드 환경설정 값
+ */
+add_replace('get_config', function ($config) {
+    // ... 환경설정을 가져올 때 실행될 코드
+    return $config;
+}, G5_HOOK_DEFAULT_PRIORITY, 1);
+```
+
+#### get_config_cache <Badge type="info" text="Replace" />
+
+그누보드 환경설정을 가져올 때 캐시된 데이터가 있을 때 이를 반환할 때 실행된다.
+
+이 Hook이 전달받는 파라미터의 값을 확인해야 한다. `$config`가 빈 배열이라면 추가 동작을 실행하지 않는 것이 좋고, `$is_cache`가 `false`이면 캐시된 데이터를 무시하고 DB에서 새로운 데이터를 가져오기를 요청한 것이므로 역시 이 Hook에서 데이터를 변경하여 반환하면 안 된다.
+
+::: warning 이 Hook은 실행되지 않을 수 있음
+콜백을 등록할 때는 이미 환경설정 데이터가 로드된 이후이며, `$config` 전역변수에 데이터를 담아 재사용되므로 이 Hook은 실행되지 않을 수 있다.
+:::
+
+```php
+/**
+ * @param array $config 그누보드 환경설정 값
+ * @param bool $is_cache 캐시된 데이터를 반환할 때 true
+ */
+add_replace('get_config_cache', function ($config, $is_cache) {
+    // 캐시된 데이터 요청이 아니거나 캐시된 데이터가 없으면 추가 동작 중지
+    if (!count($config) || !$is_cache) {
+        return $config;
+    }
+
+    // ... 환경설정을 가져올 때 실행될 코드
+
+    return $config;
+}, G5_HOOK_DEFAULT_PRIORITY, 1);
+```
 
 ## 레이아웃
 
@@ -97,6 +152,23 @@ add_replace('html_process_buffer', function ($buffer) {
 
 ### html_purifier_safeiframes <Badge type="info" text="Replace" />
 
+HTMLPurifier에서 `<iframe>` 태그를 허용할 때 특정 도메인에 대해서만 허용하는 필터가 적용되어 있으며, 이 필터 목록을 변경할 수 있다.
+
+```php
+/**
+ * @param array $domains 허용된 도메인 목록
+ */
+add_replace('html_purifier_safeiframes', function ($domains, $html) {
+    /*
+    예시: 허용 도메인 추가
+    호스트 네임만 추가하고 끝에 `/`를 붙이는 것을 권장
+    */
+    $domains[] = 'www.youtube.com/';
+
+    return $domains;
+}, G5_HOOK_DEFAULT_PRIORITY, 2);
+```
+
 ### html_purifier_config <Badge type="info" text="Event" /> <Badge type="warning" text="Since v5.5.8.3.1" />
 
 HTMLPuriier 설정을 정의할 수 있다.
@@ -108,20 +180,30 @@ HTMLPuriier 설정을 정의할 수 있다.
  *     'html': string,
  *     'write': array,
  *     'is_admin': string,
- * } $data
+ * } $data`
  */
 add_event('html_purifier_config', function($config, $data) {
+    // 예시: figure, figcaption 태그를 허용
     $def = $config->getHTMLDefinition(true);
     $def->addElement('figure', 'Block', 'Flow', 'Common');
     $def->addElement('figcaption', 'Inline', 'Flow', 'Common');
-
-    // var_dump($html);
-    // var_dump($write);
-    // var_dump($is_admin);
 }, G5_HOOK_DEFAULT_PRIORITY, 2);
 ```
 
 ### html_purifier_result <Badge type="info" text="Replace" />
+
+HTMLPurifier에 의해 필터링된 HTML 결과물을 반환할 때 실행된다. 결과물에서 일부를 다시 가공하는데 활용할 수 있다.
+
+```php
+/**
+ * @param string $html 필터링 된 HTML 코드
+ * @param HTMLPurifier $purifier
+ * @param string $rawHtml 필터링 되기 전의 원본 HTML 코드
+ */
+add_replace('html_purifier_result', function ($html, $purifier, $rawHtml) {
+    return $html;
+}, G5_HOOK_DEFAULT_PRIORITY, 3);
+```
 
 ## Database
 
@@ -165,7 +247,28 @@ add_event('sql_query_after', function ($result, $sql, $start_time, $end_time, $e
 
 ### 로그인
 
+`bbs/login_check.php` 파일에서 로그인 처리 과정 중 아래와 같은 순서로 Hook이 실행된다.
+
+- member_login_check_before
+- check_empty_member_login_password
+- login_check_need_not_password
+- password_is_wrong
+- login_session_before
+- login_check_post_check_keys
+- member_login_check
+
 #### member_login_check_before <Badge type="info" text="Event" />
+
+로그인 처리를 시작하기 전에 실행된다.
+
+```php
+/**
+ * @param string $mb_id 로그인 시도한 회원 아이디
+ */
+add_event('member_login_check_before', function ($mb_id) {
+    // ... 로그인 처리를 시작하기 전에 실행될 코드
+}, G5_HOOK_DEFAULT_PRIORITY, 1);
+```
 
 #### check_empty_member_login_password <Badge type="info" text="Replace" /> <Badge type="warning" text="Since v5.5.8.2.5" />
 
@@ -173,11 +276,49 @@ add_event('sql_query_after', function ($result, $sql, $start_time, $end_time, $e
 
 #### login_session_before <Badge type="info" text="Event" />
 
+로그인 계정의 인증을 확인을 완료한 후 세션을 생성하여 로그인 상태로 만들기 전에 실행된다.
+
+<!-- login_check.skin.php -->
+
+```php
+/**
+ * @param string $mb_id 로그인 시도한 회원 아이디
+ * @param bool $is_social_login 소셜 로그인 여부
+ */
+add_event('login_session_before', function ($mb, $is_social_login) {
+    // ... 로그인 세션을 생성하기 전에 실행될 코드
+
+    // 예시: 관리자 계정은 허용된 IP에서만 로그인 허용
+    if ($mb['mb_id'] === 'admin' && $_SERVER['REMOTE_ADDR'] !== '127.0.0.1') {
+        alert('관리자는 허용된 IP에서만 로그인할 수 있습니다.');
+    }
+}, G5_HOOK_DEFAULT_PRIORITY, 2);
+```
+
+::: info 활용 예
+
+- 차단된 IP 체크하여 로그인 시도 차단
+- 관리자 계정은 허용된 IP에서만 로그인 허용
+- 이미 로그인된 세션이 있는지 확인하여 로그인 시도 차단
+
+:::
+
 #### login_check_post_check_keys <Badge type="info" text="Replace" />
 
 #### member_login_check <Badge type="info" text="Event" />
 
-#### member_confirm_next_url <Badge type="info" text="Replace" /> <Badge type="warning" text="Since v5.5.8.2.5" />
+로그인 처리를 완료 후 실행된다.
+
+```php
+/**
+ * @param string $mb_id 로그인 시도한 회원 아이디
+ * @param string $link 이동할 페이지 URL
+ * @param bool $is_social_login 소셜 로그인 여부
+ */
+add_event('member_login_check', function ($mb, $link, $is_social_login) {
+    // ... 로그인 처리를 완료 후 실행될 코드
+}, G5_HOOK_DEFAULT_PRIORITY, 3);
+```
 
 #### password_is_wrong <Badge type="info" text="Event" />
 
@@ -204,6 +345,12 @@ add_event('password_is_wrong', function ($type, $data, $qstr = '') {
 
 :::
 
+#### member_confirm_next_url <Badge type="info" text="Replace" /> <Badge type="warning" text="Since v5.5.8.2.5" />
+
+#### member_login_tail <Badge type="info" text="Event" />
+
+### 로그아웃, 차단, 탈퇴
+
 #### member_logout <Badge type="info" text="Event" />
 
 회원 로그아웃 처리를 완료한 후 페이지를 이동시키기 전에 실행된다.
@@ -228,34 +375,7 @@ add_event('member_logout', function ($link) {
 
 :::
 
-### get_member <Badge type="info" text="Replace" />
-
-`get_member()` 함수로 회원정보를 가져올 때 실행된다.
-
-```php
-/**
- * @param array $data DB 쿼리 결과로 가져온 회원 정보
- * @param string $mb_id 회원 아이디
- * @param string $fields 요청한 필드 목록
- * @param bool $is_cache 캐시 사용 여부
- */
-add_replace('get_member', function ($data, $mb_id, $fields, $is_cache) {
-    error_log('회원 정보: ' . print_r($mb_id, true));
-    return $data;
-}, G5_HOOK_DEFAULT_PRIORITY, 4);
-```
-
-### admin_member_form_update <Badge type="info" text="Event" />
-
-### admin_member_form_add <Badge type="info" text="Event" />
-
-### admin_member_form_after <Badge type="info" text="Event" />
-
-### admin_member_list_update <Badge type="info" text="Event" />
-
-### member_login_tail <Badge type="info" text="Event" />
-
-### member_leave <Badge type="info" text="Event" />
+#### member_leave <Badge type="info" text="Event" />
 
 회원이 자신의 계정을 탈퇴할 때 실행된다.
 
@@ -272,7 +392,7 @@ add_event('member_leave', function ($mb_id) {
 그누보드는 회원 탈퇴 시 회원 데이터를 삭제하지 않고 `mb_leave_date` 필드에 탈퇴일을 기록하고 탈퇴된 계정으로 일정기간 보관한다. 그러므로, 이 Hook에서는 회원과 관련된 데이터를 완전히 제거하지 않도록 주의해야 한다. 회원 데이터가 완전히 삭제될 때는 아래 `member_delete_after` Hook이 실행된다.
 :::
 
-### member_delete_after <Badge type="info" text="Event" />
+#### member_delete_after <Badge type="info" text="Event" />
 
 회원 계정의 데이터가 삭제한 후 실행된다. 주로 관리자 권한으로 회원을 삭제할 때이다.
 
@@ -298,17 +418,24 @@ add_event('member_delete_after', function ($mb_id) {
 
 :::
 
-### register_member_chk_captcha <Badge type="info" text="Replace" />
+### 회원정보
 
-### register_member_password_check <Badge type="info" text="Replace" />
+#### get_member <Badge type="info" text="Replace" />
 
-### register_form_update_mail_mb_content <Badge type="info" text="Replace" />
+`get_member()` 함수로 회원정보를 가져올 때 실행된다.
 
-### register_form_update_mail_admin_subject <Badge type="info" text="Replace" />
-
-### register_form_update_mail_admin_content <Badge type="info" text="Replace" />
-
-### register_form_update_mail_certify_content <Badge type="info" text="Replace" />
+```php
+/**
+ * @param array $data DB 쿼리 결과로 가져온 회원 정보
+ * @param string $mb_id 회원 아이디
+ * @param string $fields 요청한 필드 목록
+ * @param bool $is_cache 캐시 사용 여부
+ */
+add_replace('get_member', function ($data, $mb_id, $fields, $is_cache) {
+    error_log('회원 정보: ' . print_r($mb_id, true));
+    return $data;
+}, G5_HOOK_DEFAULT_PRIORITY, 4);
+```
 
 ### member_sideview_items <Badge type="info" text="Replace" /> <Badge type="warning" text="Since v5.5.8.2.6" />
 
@@ -354,6 +481,26 @@ $siteview['menus']['admin_member_point']; // 포인트 내역
 의도한 순서가 뒤바뀌지 않도록 `$siteview['menus']` 항목의 순서는 재정렬하지 않도록 하자.
 :::
 
+### admin_member_form_update <Badge type="info" text="Event" />
+
+### admin_member_form_add <Badge type="info" text="Event" />
+
+### admin_member_form_after <Badge type="info" text="Event" />
+
+### admin_member_list_update <Badge type="info" text="Event" />
+
+### register_member_chk_captcha <Badge type="info" text="Replace" />
+
+### register_member_password_check <Badge type="info" text="Replace" />
+
+### register_form_update_mail_mb_content <Badge type="info" text="Replace" />
+
+### register_form_update_mail_admin_subject <Badge type="info" text="Replace" />
+
+### register_form_update_mail_admin_content <Badge type="info" text="Replace" />
+
+### register_form_update_mail_certify_content <Badge type="info" text="Replace" />
+
 ### register_form_update_before <Badge type="info" text="Event" />
 
 ### register_form_update_valid <Badge type="info" text="Event" />
@@ -369,6 +516,22 @@ $siteview['menus']['admin_member_point']; // 포인트 내역
 ### register_form_before <Badge type="info" text="Event" />
 
 ### register_form_after <Badge type="info" text="Event" />
+
+### get_mb_icon_name <Badge type="info" text="Replace" />
+
+## 쪽지
+
+### memo_list <Badge type="info" text="Event" />
+
+<!-- 이건 대체 왜 있는 Hook 일까... -->
+
+### memo_delete <Badge type="info" text="Event" />
+
+### memo_form_update_before <Badge type="info" text="Event" />
+
+### memo_form_update_after <Badge type="info" text="Event" />
+
+### memo_form_update_failed <Badge type="info" text="Event" />
 
 ## 게시판
 
@@ -522,19 +685,62 @@ add_event('bbs_delete', function ($write, $board) {
 
 ## 인증/권한
 
-### is_admin <Badge type="info" text="Replace" />
+### is_admin <Badge type="info" text="Replace" /> <Badge type="danger" text="DO NOT USE" />
+
+::: danger 사용하지 않는 것을 권장
+이 Hook은 `is_admin()` 함수가 반환하는 값을 변경할 수 있지만 그누보드의 권한 처리에 심각한 영향을 줄 수 있으므로 사용하지 않는 것을 권장한다.
+
+아래와 같이 관리 권한을 확인할 때 영향을 줄 수 있으며, 매우 심각한 권한 문제를 발생시킬 수 있다.
+
+```php
+if (!is_admin($member['mb_id'])) {
+    // ... 관리자가 아닌 경우에만 실행될 코드
+}
+
+if (is_admin($member['mb_id'])) {
+    // ... 관리 권한이 있을때만 실행될 코드
+}
+```
+
+또한, 다음과 같이 특정 권한을 확인할 떄에도 영향을 줄 수 있다.
+
+```php
+if (is_admin($member['mb_id']) === 'group') {
+    // ... 'group' 관리자일 때만 실행될 코드
+}
+```
+
+::: details 그래도 변경이 필요하다면...
+
+`$is_authority` 값이이 비어있는지 확인하여 변경하는 것이 좋다. 반드시 관리자 수준의 권한 부여에만 사용되어야하며 기타 목적으로 응용하면 안 된다.
 
 ```php
 /**
  * @param string $is_authority
  * @param string $mb_id
  */
-add_event('is_admin', function ($is_authority, $mb_id) {
-    // 관리자 권한 확인 후 실행될 코드
-    error_log('관리자 권한 확인: ' . $mb_id);
+add_replace('is_admin', function ($is_authority, $mb_id) {
+    // 예시: 관리자 권한을 변경
+    if (!$is_authority) {
+        $condition = false;
+        if ($condition === true) {
+            $is_authority = 'manager';
+        }
+    }
+
+    // 또는
+    if ($is_authority !== 'super') {
+        $condition = false;
+        if ($condition === true) {
+            $is_authority = 'manager';
+        }
+    }
+
     return $is_authority;
 }, G5_HOOK_DEFAULT_PRIORITY, 2);
 ```
+
+:::
 
 ### cert_refresh_update_after <Badge type="info" text="Event" /> <Badge type="warning" text="Since v5.5.8.2" />
 
@@ -552,6 +758,58 @@ add_event('is_admin', function ($is_authority, $mb_id) {
 
 ### admin_faq_master_deleted <Badge type="info" text="Event" /> <Badge type="warning" text="Since v5.5.8.3.2" />
 
+## URL / 짧은주소
+
+### add_nginx_conf_pre_rules <Badge type="info" text="Replace" /> <Badge type="warning" text="Since v5.5.8.2.8" />
+
+### add_nginx_conf_rules <Badge type="info" text="Replace" />
+
+### add_mod_rewrite_pre_rules <Badge type="info" text="Replace" /> <Badge type="warning" text="Since v5.5.8.2.8" />
+
+### add_mod_rewrite_rules <Badge type="info" text="Replace" />
+
+### get_pretty_url <Badge type="info" text="Replace" />
+
+### url_clean_page_names <Badge type="info" text="Replace" />
+
+### false_short_url_clean <Badge type="info" text="Replace" />
+
+### exist_check_seo_title <Badge type="info" text="Replace" />
+
+### url_clean_page_paths <Badge type="info" text="Replace" />
+
+## cache
+
+### adm_cache_file_delete_before <Badge type="info" text="Event" />
+
+### adm_cache_file_delete <Badge type="info" text="Event" />
+
+### g5_set_cache_event <Badge type="info" text="Event" />
+
+### adm_cache_delete <Badge type="info" text="Event" />
+
+### delete_cache_latest <Badge type="info" text="Event" /> <Badge type="warning" text="Since v5.5.9" />
+
+## 썸네일
+
+### delete_editor_thumbnail_before <Badge type="info" text="Event" />
+
+### delete_editor_thumbnail_after <Badge type="info" text="Event" />
+
+### is_secret_list_thumbnail <Badge type="info" text="Replace" />
+
+### get_list_thumbnail_info <Badge type="info" text="Replace" />
+
+### get_file_thumbnail_tags <Badge type="info" text="Replace" />
+
+### thumbnail_is_animated_gif_content <Badge type="info" text="Replace" />
+
+### get_view_thumbnail <Badge type="info" text="Replace" />
+
+### thumb_image_tag <Badge type="info" text="Replace" />
+
+### thumb_view_image_href <Badge type="info" text="Replace" />
+
 ---
 
 ## Event
@@ -559,10 +817,6 @@ add_event('is_admin', function ($is_authority, $mb_id) {
 ### adm_auth_delete_member <Badge type="info" text="Event" />
 
 ### adm_auth_update <Badge type="info" text="Event" />
-
-### adm_cache_file_delete_before <Badge type="info" text="Event" />
-
-### adm_cache_file_delete <Badge type="info" text="Event" />
 
 ### admin_config_form_update <Badge type="info" text="Event" />
 
@@ -592,31 +846,11 @@ add_event('is_admin', function ($is_authority, $mb_id) {
 
 ### admin_get_page\_\* <Badge type="info" text="Event" />
 
-### memo_delete <Badge type="info" text="Event" />
-
-### memo_form_update_before <Badge type="info" text="Event" />
-
-### memo_form_update_after <Badge type="info" text="Event" />
-
-### memo_form_update_failed <Badge type="info" text="Event" />
-
-### memo_list <Badge type="info" text="Event" />
-
 ### password_lost_certify_before <Badge type="info" text="Event" />
 
 ### password_lost_certify_after <Badge type="info" text="Event" />
 
 ### password_lost2_after <Badge type="info" text="Event" />
-
-### g5_set_cache_event <Badge type="info" text="Event" />
-
-### adm_cache_delete <Badge type="info" text="Event" />
-
-### delete_cache_latest <Badge type="info" text="Event" /> <Badge type="warning" text="Since v5.5.9" />
-
-### delete_editor_thumbnail_before <Badge type="info" text="Event" />
-
-### delete_editor_thumbnail_after <Badge type="info" text="Event" />
 
 ### mail_send_result <Badge type="info" text="Event" />
 
@@ -631,8 +865,6 @@ add_event('is_admin', function ($is_authority, $mb_id) {
 ### get_editor_upload_url <Badge type="info" text="Replace" /> <Badge type="warning" text="Updated v5.5.8.3.2" />
 
 ### head_css_url <Badge type="info" text="Replace" />
-
-### admin_csrf_token_key <Badge type="info" text="Replace" />
 
 ### admin_amenu <Badge type="info" text="Replace" />
 
@@ -657,8 +889,6 @@ add_event('is_admin', function ($is_authority, $mb_id) {
 ### download_file_exist_check <Badge type="info" text="Replace" />
 
 ### bbs_move_update_file <Badge type="info" text="Replace" />
-
-### thumb_view_image_href <Badge type="info" text="Replace" />
 
 ### exists_view_image <Badge type="info" text="Replace" />
 
@@ -708,10 +938,6 @@ add_event('is_admin', function ($is_authority, $mb_id) {
 
 ### check_same_url_host <Badge type="info" text="Replace" /> <Badge type="warning" text="Since v5.5.8.1" />
 
-### get_config_cache <Badge type="info" text="Replace" />
-
-### get_config <Badge type="info" text="Replace" />
-
 ### get_menu_db_cache <Badge type="info" text="Replace" />
 
 ### get_menu_db <Badge type="info" text="Replace" />
@@ -720,45 +946,13 @@ add_event('is_admin', function ($is_authority, $mb_id) {
 
 ### get_permission_debug_show <Badge type="info" text="Replace" />
 
-### get_mb_icon_name <Badge type="info" text="Replace" />
-
 ### mailer <Badge type="info" text="Replace" />
 
 ### mail_options <Badge type="info" text="Replace" />
 
 ### outlogin_content <Badge type="info" text="Replace" />
 
-### url_clean_page_paths <Badge type="info" text="Replace" />
-
-### is_secret_list_thumbnail <Badge type="info" text="Replace" />
-
 ### get_editor_filename <Badge type="info" text="Replace" />
-
-### get_list_thumbnail_info <Badge type="info" text="Replace" />
-
-### get_file_thumbnail_tags <Badge type="info" text="Replace" />
-
-### thumbnail_is_animated_gif_content <Badge type="info" text="Replace" />
-
-### get_view_thumbnail <Badge type="info" text="Replace" />
-
-### get_pretty_url <Badge type="info" text="Replace" />
-
-### url_clean_page_names <Badge type="info" text="Replace" />
-
-### false_short_url_clean <Badge type="info" text="Replace" />
-
-### exist_check_seo_title <Badge type="info" text="Replace" />
-
-### add_nginx_conf_pre_rules <Badge type="info" text="Replace" /> <Badge type="warning" text="Since v5.5.8.2.8" />
-
-### add_nginx_conf_rules <Badge type="info" text="Replace" />
-
-### add_mod_rewrite_pre_rules <Badge type="info" text="Replace" /> <Badge type="warning" text="Since v5.5.8.2.8" />
-
-### add_mod_rewrite_rules <Badge type="info" text="Replace" />
-
-### thumb_image_tag <Badge type="info" text="Replace" />
 
 ## shop
 
