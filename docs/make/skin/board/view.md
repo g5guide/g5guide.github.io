@@ -3,4 +3,3 @@
 - view.head.skin.php
 - view.skin.php
 - view.tail.skin.php
-

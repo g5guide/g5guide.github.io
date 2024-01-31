@@ -4,11 +4,10 @@ head:
     - name: canonical
       content: https://g5guide.github.io/developers/changelog.html
 ---
+
 # 변경 내역
 
 ## 5.5.8.2.7
-
-
 
 ## 5.5.8.2.6
 

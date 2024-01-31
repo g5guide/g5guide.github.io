@@ -4,6 +4,7 @@ head:
     - name: canonical
       content: https://g5guide.github.io/developers/path_and_url.html
 ---
+
 # 경로 및 URL Rewrite
 
 파일을 include 하거나 스킨의 경로 지정, JS/CSS 파일을 로드하는 등 서버 내 경로나 URL을 사용할 때 미리 만들어진 상수나 헬퍼 함수를 활용할 수 있다.
@@ -72,12 +73,13 @@ function myRewriteRules($rules = '')
 ```
 
 ::: tip
+
 - 문자열을 반환해야하며 이 Hook을 사용하는 다른 확장과의 문제가 없도록 앞뒤로 개행문자(`PHP_EOL`, `'\n'`)를 포함해야 한다.
 - 제안이 제대로 적용되었는지 확인하려면 '환경설정 -> 기본환경설정 -> 짧은주소' 에서 'Apache 설정 코드 보기' 버튼을 클릭해야 한다. Apache/Nginx 서버에 따라 버튼이 하나만 보이므로 브라우저 콘솔을 이용하자.
-    ```php
-    // apache
-    $('[data-remodal-id=modal_apache]').remodal().open();
-    // nginx
-    $('[data-remodal-id=modal_nginx]').remodal().open();
-    ```
-:::
+  `php
+// apache
+$('[data-remodal-id=modal_apache]').remodal().open();
+// nginx
+$('[data-remodal-id=modal_nginx]').remodal().open();
+`
+  :::

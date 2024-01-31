@@ -17,4 +17,3 @@ Markdown 문법은 https://vitepress.dev/guide/markdown 페이지에서 확인�
 ## 저작권 및 라이선스 안내
 
 작성되는 문서는 [저작자표시-동일조건변경허락 4.0 국제 (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.ko) License가 적용됩니다.
-

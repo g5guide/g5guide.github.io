@@ -6,16 +6,19 @@
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "format": "prettier --check --write .",
+    "format:fail": "prettier --check ."
   },
   "devDependencies": {
-    "@giscus/vue": "^2.3.0",
+    "@giscus/vue": "^2.4.0",
     "deepmerge": "^4.3.1",
+    "prettier": "^3.2.4",
     "sitemap": "^7.1.1",
-    "vitepress": "^1.0.0-rc.31",
+    "vitepress": "1.0.0-rc.40",
     "vitepress-plugin-google-analytics": "^1.0.2",
-    "vitepress-plugin-tabs": "^0.3.0",
-    "vue": "^3.2.45"
+    "vitepress-plugin-tabs": "^0.5.0",
+    "vue": "^3.4.15"
   },
   "author": {
     "name": "kkigomi",

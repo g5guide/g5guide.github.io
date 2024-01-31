@@ -4,6 +4,7 @@ head:
     - name: canonical
       content: https://g5guide.github.io/developers/make_plugin.html
 ---
+
 # 플러그인 (extend)
 
 `/extend` 폴더에 `*.php` 파일을 두면 자동으로 include 한다.
@@ -25,6 +26,7 @@ head:
 `.php` 확장자인 PHP 파일이면 되지만 관습을 따라 `*.extend.php`와 같은 파일명을 사용하자.
 
 ::: code-group
+
 ```php [/extend/my_plugin.extend.php]
 add_event('tail_sub', 'myPluginListenerTailSub');
 function myPluginListenerTailSub()
@@ -32,6 +34,7 @@ function myPluginListenerTailSub()
     // ...
 }
 ```
+
 :::
 
 ::: tip
@@ -49,6 +52,7 @@ extend 폴더에서 PHP 파일을 나눠야 한다면 따로 include 되므로 �
 앞에서 만든 `/extend/my_plugin.extend.php` 파일을 분리해보자.
 
 ::: code-group
+
 ```php [/extend/my_plugin.extend.php]
 add_event('tail_sub', 'myPluginListenerTailSub'); // [!code --]
 function myPluginListenerTailSub() // [!code --]
@@ -57,9 +61,11 @@ function myPluginListenerTailSub() // [!code --]
 } // [!code --]
 include_once '../plugin/my_plugin/bootstrap.php'; // [!code ++]
 ```
+
 :::
 
 ::: code-group
+
 ```php [/plugin/my_plugin/bootstrap.php]
 # /plugin/my_plugin/bootstrap.php
 
@@ -79,6 +85,7 @@ function myPluginListenerTailSub()
   // ...
 }
 ```
+
 :::
 
 ::: details 폴더를 펼쳐보면
@@ -93,6 +100,7 @@ function myPluginListenerTailSub()
         │      └── style.css
         └── my_plugin.extend.php // [!code hl]
 ```
+
 :::
 
 ::: tip
@@ -130,7 +138,6 @@ include_once '../plugin/my_plugin/bootstrap.php';
 
 [Namespace](https://www.php.net/manual/en/language.namespaces.rationale.php)를 적극 활용하자. PHP 5.3(2014년 출시)부터 지원한다.
 
-
 ::: tip
 이름 중복문제를 피하고 [오염된 글로벌 변수](/developers/polluted_variables) 문제에서 벗어나기위해 아래와 같이 include하는 파일이 글로벌 스코프의 영향을 받지 않도록 간단한 방법을 사용할 수 있다(PHP 7 버전 이상).
 
@@ -139,4 +146,5 @@ include_once '../plugin/my_plugin/bootstrap.php';
     include_once '../plugin/my_plugin/bootstrap.php';
 })();
 ```
+
 :::

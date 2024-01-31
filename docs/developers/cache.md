@@ -4,6 +4,7 @@ head:
     - name: canonical
       content: https://g5guide.github.io/developers/cache.html
 ---
+
 # 캐시 (Cache)
 
 TBD
@@ -82,7 +83,7 @@ function delete($type, $key, $group = 'default');
 
 캐시를 저장할 때 유지시간(TTL)을 지정하여 자동으로 만료시킬 수 있으며, TTL을 설정하지 않았더라도 데이터를 가져올 때 `$expired_time`을 지정하여 만료시킬 수 있다.
 
-데이터를 가져올 때 지정하는 `$expired_time`은 목적에 따라 캐시를 만료시키는 상황을 분리할 수 있다. 예로, 
+데이터를 가져올 때 지정하는 `$expired_time`은 목적에 따라 캐시를 만료시키는 상황을 분리할 수 있다. 예로,
 
 ### g5_set_cache()
 

@@ -5,6 +5,7 @@ head:
       content: https://g5guide.github.io/developers/hook.html
 description: 그누보드 hook 사용법
 ---
+
 # Hook
 
 그누보드5는 기능 확장 방법으로 Hook을 지원한다.

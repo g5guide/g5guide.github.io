@@ -1,2 +1,39 @@
+# Vitepress 문서 빌드 시 생성되는 파일과 디렉토리 무시
 docs/.vitepress/cache
 docs/.vitepress/dist
+
+# Node.js 패키지 및 의존성 모듈 무시
+node_modules
+
+# 로그 파일 무시
+*.log
+
+# 압축 파일 무시
+*.tgz
+
+# macOS의 DS_Store 파일 무시
+.DS_Store
+
+# IntelliJ IDEA 프로젝트 디렉토리 무시
+.idea
+
+# 임시 디렉토리 무시
+.temp
+
+# Vite의 옵션 캐시 디렉토리 무시
+.vite_opt_cache
+
+# Visual Studio Code 설정 디렉토리 무시
+.vscode
+
+# 빌드된 파일이나 디렉토리 무시
+dist
+
+# 캐시 디렉토리 무시
+cache
+temp
+examples-temp
+
+# pnpm 무시
+pnpm-global
+pnpm-lock.yaml
